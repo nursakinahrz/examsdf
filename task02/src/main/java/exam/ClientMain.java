@@ -1,7 +1,8 @@
 package exam;
 
 
-//import java.io.Console;
+import java.io.Console;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -11,7 +12,7 @@ import java.net.Socket;
 
 public class ClientMain {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, EOFException {
 
         System.out.println("connecting to host at port 80 ");
         Socket socket = new Socket("task02.chuklee.com", 80);
@@ -38,22 +39,26 @@ public class ClientMain {
         }
 
         float average = (sum/ num.length); 
-        System.out.println("Average is: " + average);
 
         //4. 
-       // Console cons = System.console();
+        Console cons = System.console();
 
-        oos.writeUTF("type request id here");
-        oos.writeUTF("Nursakinah Binte Abdul Razak");
-        oos.writeUTF("nursakinah.arz@gmail.com");
+        String requestID = cons.readLine("> Type your request ID");
+        String name = cons.readLine("> Type your name as per NRIC");
+        String email = cons.readLine("> Type your email");
+        System.out.println(average);
+        
+       
+
+        oos.writeUTF(requestID);
+        oos.writeUTF(name);
+        oos.writeUTF(email);
         oos.writeFloat(average);
 
         //5. readboolean
     
         while (ois.readBoolean()) {
             
-
-
             
         }
 
@@ -63,10 +68,7 @@ public class ClientMain {
 
        
         
-        //String input = cons.readLine(">");
-        //String requestID = cons.readLine("> Type your request ID");
-        //String email = cons.readLine("> Type your email");
-        //String name = cons.readLine("> Type your name as per NRIC");
+        
 
         /*while ((input !=null)) {
             if ("exit".equals(input)) {
